@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forum - Discussion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #1e1f21;
+            color: white;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 100vh;
+        }
+        
+        main {
+            flex: 1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1e1f21;
+            padding: 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            background-color: #5865f2;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .account-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 40px;
+            background-color: #222;
+            border: 1px solid #555;
+            border-radius: 8px;
+            padding: 10px;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #444;
+        }
+        
+        .forum-page {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .forum-actions-bar {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .search-bar {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            background-color: #2b2d31;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 0 10px;
+        }
+
+        .search-bar i { color: #888; }
+        
+        .search-bar input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: white;
+            padding: 10px;
+            outline: none;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .new-post-btn {
+            background-color: #5865f2;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .filter-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 24px;
+            align-items: center;
+        }
+
+        .filter-btn {
+            background-color: #2b2d31;
+            color: #ccc;
+            border: 1px solid #444;
+            border-radius: 20px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 0.9em;
+        }
+        
+        .filter-btn.active {
+            background-color: #5865f2;
+            color: white;
+            border-color: #5865f2;
+        }
+        
+        .filter-btn i { margin-right: 5px; }
+
+        .thread-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .thread-item {
+            background-color: #2b2d31;
+            border-radius: 8px;
+            padding: 16px;
+            border: 1px solid #444;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .thread-item:hover { border-color: #5865f2; }
+        .thread-title-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .thread-title { font-size: 1.2em; font-weight: bold; color: #f0f0f0; margin: 0; }
+        .new-tag { background-color: #5865f2; color: white; border-radius: 5px; padding: 2px 6px; font-size: 0.7em; font-weight: bold; }
+        .thread-snippet { font-size: 0.9em; color: #aaa; margin: 0 0 12px 0; }
+        .username { color: #ff9900; font-weight: bold; }
+        .thread-meta { display: flex; align-items: center; gap: 15px; font-size: 0.8em; color: #888; }
+        .comment-info { display: flex; align-items: center; gap: 5px; }
+
+        .role-normal .forum-actions-bar {
+            display: none;
+        }
+
+        footer {
+            text-align: right;
+            padding: 20px;
+            font-size: 0.8em;
+            border-top: 1px solid #333;
+        }
+
+        footer a {
+            color: white;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <a href="homepage.html" class="logo">ONE VOTE ONE FUTURE</a>
+            <nav>
+                <a href="homepage.html">HOME</a>
+                <a href="candidates.html">CANDIDATES</a>
+                <a href="awareness.html">AWARENESS</a>
+                <a href="report.html">REPORT</a>
+                <a href="forum.html">FORUM</a>
+            </nav>
+            <div class="account-menu">
+                <i class="fas fa-bars menu-icon"></i>
+                <div class="dropdown-menu">
+                    <a href="favorites.html">Favorites</a>
+                    <a href="settings.html">Settings</a>
+                    <a href="my-account.html">My Account</a>
+                    <a href="index.html">Log Out</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="forum-page">
+            <div class="forum-actions-bar">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search for posts...">
+                </div>
+                <button class="new-post-btn">New Post</button>
+            </div>
+
+            <div class="filter-bar">
+                <button class="filter-btn active">All</button>
+                <button class="filter-btn"><i class="fas fa-landmark"></i> Politics</button>
+                <button class="filter-btn"><i class="fas fa-heartbeat"></i> Health</button>
+                <button class="filter-btn"><i class="fas fa-share-alt"></i> Social Media</button>
+            </div>
+
+            <div class="thread-list">
+                <div class="thread-item">
+                    <div class="thread-title-row">
+                        <h2 class="thread-title">PSA: Official statement on new voting guidelines</h2>
+                        <span class="new-tag">VERIFIED</span>
+                    </div>
+                    <p class="thread-snippet">
+                        <span class="username">COMELEC_Official:</span> Please be advised of the updated voter registration deadlines and procedures. All information can be found on our official website...
+                    </p>
+                    <div class="thread-meta">
+                        <div class="comment-info"><i class="far fa-comment"></i><span>152</span></div>
+                        <span class="timestamp">1h ago</span>
+                    </div>
+                </div>
+                
+                <div class="thread-item">
+                    <div class="thread-title-row">
+                        <h2 class="thread-title">Fact Check: Viral message about candidate disqualification</h2>
+                    </div>
+                    <p class="thread-snippet">
+                        <span class="username">VeraFiles_PH:</span> The viral chain message claiming a presidential candidate has been disqualified is false. Our team has verified with the authorities...
+                    </p>
+                    <div class="thread-meta">
+                         <div class="comment-info"><i class="far fa-comment"></i><span>98</span></div>
+                        <span class="timestamp">5h ago</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+        </footer>
+    </div>
+    
+    <script>
+        const userRole = 'normal'; 
+
+        if (userRole === 'normal') {
+            document.body.classList.add('role-normal');
+        } else if (userRole === 'admin') {
+            document.body.classList.add('role-admin');
+        }
+
+
+        // Dropdown Menu Script
+        const menuIcon = document.querySelector('.menu-icon');
+        const dropdown = document.querySelector('.dropdown-menu');
+        menuIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        });
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.account-menu')) {
+                dropdown.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
