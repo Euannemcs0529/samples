@@ -1,213 +1,373 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1" name="viewport"/>
-<title>
-My Account
-</title>
-<script src="https://cdn.tailwindcss.com">
-</script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Whitney:wght@400;600&display=swap');
-body {
-font-family: 'Whitney', system-ui, -apple-system, BlinkMacSystemFont,
-'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
-'Helvetica Neue', sans-serif;
-}
-</style>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>My Account</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #1e1f21;
+            color: white;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 100vh;
+        }
+        
+        main {
+            flex: 1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1e1f21;
+            padding: 20px;
+        }
+
+        .logo {
+            background-color: #5865f2;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .account-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 40px;
+            background-color: #222;
+            border: 1px solid #555;
+            border-radius: 8px;
+            padding: 10px;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+            transition: background 0.2s;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #444;
+        }
+
+        .account-main {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+        }
+
+        .account-container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .account-container h1 {
+            font-size: 2em;
+            margin-bottom: 24px;
+            font-weight: bold;
+        }
+
+        .settings-card {
+            background-color: #2b2d31;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+        
+        .profile-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            flex-grow: 1;
+        }
+        
+        .profile-btn {
+            background-color: #5865f2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 0;
+            border-bottom: 1px solid #444;
+        }
+
+        .detail-item:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: bold;
+            color: #ccc;
+        }
+        
+        .detail-value {
+            color: #f0f0f0;
+        }
+        
+        .detail-value input {
+            background-color: #1e1f21;
+            border: 1px solid #5865f2;
+            color: white;
+            padding: 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .detail-actions .edit-btn, .detail-actions .save-btn {
+            background-color: #4a4a4f;
+            color: #ccc;
+            border: none;
+            padding: 6px 12px;
+            font-size: 0.8em;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .detail-actions .save-btn {
+            background-color: #5865f2;
+            color: white;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .password-section h2 {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+
+        footer {
+            text-align: right;
+            padding: 20px;
+            font-size: 0.8em;
+        }
+
+        footer a {
+            color: white;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+    </style>
 </head>
-<body class="bg-[#2f2f33] text-white min-h-screen flex justify-center items-start p-4">
-<div class="flex w-full max-w-[1200px] min-h-[720px] rounded-md overflow-hidden shadow-lg">
-<!-- Sidebar -->
-<aside class="bg-[#29292e] w-64 flex flex-col p-4 space-y-4 text-[13px] select-none">
-<div>
-<input aria-label="Search" class="w-full bg-[#3a3a40] rounded-md px-3 py-1.5 text-white placeholder:text-[#b0b0b0] text-[13px] focus:outline-none" placeholder="Search" type="search"/>
-<button aria-label="Search button" class="absolute right-6 top-6 text-[#b0b0b0] hover:text-white" tabindex="-1">
-<i class="fas fa-search">
-</i>
-</button>
+<body>
+<div class="wrapper">
+    <header>
+        <a href="homepage.html" class="logo">ONE VOTE ONE FUTURE</a>
+        <nav>
+            <a href="homepage.html">HOME</a>
+            <a href="candidates.html">CANDIDATES</a>
+            <a href="awareness.html">AWARENESS</a>
+            <a href="report.html">REPORT</a>
+            <a href="forum.html">FORUM</a>
+        </nav>
+        <div class="account-menu">
+            <i class="fas fa-bars menu-icon"></i>
+            <div class="dropdown-menu">
+                <a href="favorites.html">Favorites</a>
+                <a href="settings.html">Settings</a>
+                <a href="my-account.html">My Account</a>
+                <a href="index.html">Log Out</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="account-main">
+        <div class="account-container">
+            <h1>My Account</h1>
+            
+            <div class="settings-card">
+                <div class="profile-header">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWIYI-iunGwsdpa4Ph07tSeQ1eAr8z8y_HCdonOMCV7ufx5rXEVqJ23AhCwil1lGXZBJ4&usqp=CAU" alt="Avatar of Kioshi" class="profile-avatar"/>
+                    <div class="profile-name">Kioshi</div>
+                    <button class="profile-btn">Edit User Profile</button>
+                </div>
+
+                <div class="detail-item">
+                    <div>
+                        <div class="detail-label">Display Name</div>
+                        <div class="detail-value">
+                            <span>Kioshi</span>
+                            <input type="text" class="hidden" value="Kioshi"/>
+                        </div>
+                    </div>
+                    <div class="detail-actions">
+                        <button class="edit-btn">Edit</button>
+                        <button class="save-btn hidden">Save</button>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div>
+                        <div class="detail-label">Username</div>
+                        <div class="detail-value">
+                            <span>kioshi29</span>
+                            <input type="text" class="hidden" value="kioshi29"/>
+                        </div>
+                    </div>
+                    <div class="detail-actions">
+                        <button class="edit-btn">Edit</button>
+                        <button class="save-btn hidden">Save</button>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div>
+                        <div class="detail-label">Email</div>
+                        <div class="detail-value">
+                            <span>************@gmail.com</span>
+                            <input type="email" class="hidden" value="user@gmail.com"/>
+                        </div>
+                    </div>
+                    <div class="detail-actions">
+                        <button class="edit-btn">Edit</button>
+                        <button class="save-btn hidden">Save</button>
+                    </div>
+                </div>
+
+                <div class="detail-item">
+                    <div>
+                        <div class="detail-label">Phone Number</div>
+                        <div class="detail-value">
+                            <span>********6155</span>
+                            <input type="text" class="hidden" value="09123456155"/>
+                        </div>
+                    </div>
+                    <div class="detail-actions">
+                        <button class="edit-btn">Edit</button>
+                        <button class="save-btn hidden">Save</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-card password-section">
+                <h2>Password and Authentication</h2>
+                <button class="profile-btn">Change Password</button>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+    </footer>
 </div>
-<div class="uppercase text-[9px] font-semibold text-[#7a7a7a] mb-1 select-none">
-User Settings
-</div>
-<nav class="flex flex-col space-y-1 text-[14px] font-normal">
-<button aria-current="page" class="bg-[#3a3a40] rounded-md px-3 py-1.5 text-white font-semibold text-[14px] text-left flex items-center justify-between">
-My Account
-</button>
-<button class="flex items-center justify-between px-3 py-1.5 rounded-md hover:bg-[#3a3a40]">
-<span>
-Profiles
-</span>
-<span class="bg-[#ff4c4c] text-[10px] font-bold rounded-full px-1.5 py-[1px] ml-2 select-none">
-NEW
-</span>
-</button>
-<button class="px-3 py-1.5 rounded-md hover:bg-[#3a3a40] text-left w-full">
-Content &amp; Social
-</button>
-<button class="px-3 py-1.5 rounded-md hover:bg-[#3a3a40] text-left w-full">
-Data &amp; Privacy
-</button>
-<button class="px-3 py-1.5 rounded-md hover:bg-[#3a3a40] text-left w-full">
-Devices
-</button>
-<button class="px-3 py-1.5 rounded-md hover:bg-[#3a3a40] text-left w-full">
-Connections
-</button>
-</nav>
-<div class="uppercase text-[9px] font-semibold text-[#7a7a7a] mt-6 mb-1 select-none">
-Website Settings
-</div>
-<nav class="flex flex-col space-y-1 text-[14px] font-normal">
-<a href="homepage.html " class="block px-3 py-1.5 rounded-md hover:bg-[#3a3a40] tex-left w-full">
-Home
-</a>
-</button>
-<a href="candidates.html" class="block px-3 py-1.5 rounded-md hover:bg-[#3a3a40] tex-left w-full">
-Candidates
-</a>
-</button>
-<button class="px-3 py-1.5 rounded-md hover:bg-[#3a3a40] text-left w-full">
-Awareness
-</button>
-<button class="px-3 py-1.5 rounded-md hover:bg-[#3a3a40] text-left w-full">
-Notifications
-</button>
-<button class="px-3 py-1.5 rounded-md hover:bg-[#3a3a40] text-left w-full">
-Report
-</button>
-<button class="px-3 py-1.5 rounded-md hover:bg-[#3a3a40] text-left w-full">
-Forum
-</button>
-</nav>
-</aside>
-<!-- Main content -->
-<main class="flex-1 bg-[#3a3a40] p-6 relative text-[14px]">
-<header class="flex justify-between items-center mb-6">
-<h1 class="text-white font-semibold text-lg select-none">
-My Account
-</h1>
-<button aria-label="Close" class="text-[#b0b0b0] hover:text-white text-xl font-light rounded-full border border-transparent hover:border-[#b0b0b0] w-8 h-8 flex items-center justify-center">
-<i class="fas fa-times">
-</i>
-</button>
-</header>
-<nav class="flex space-x-6 mb-6 text-[13px] select-none">
-<button aria-current="page" class="text-[#4a90e2] border-b-2 border-[#4a90e2] pb-1 font-semibold">
-Security
-</button>
-</nav>
-<section class="bg-[#2f2f33] rounded-md p-4 max-w-4xl">
-<div class="flex items-center space-x-4 mb-4">
-<img alt="Avatar of Kioshi wearing blue shirt and glasses" class="rounded-full border-2 border-[#29292e]" height="48" src="https://storage.googleapis.com/a1aa/image/27527e7b-6de4-4ee5-d321-56d9f96702f4.jpg" width="48"/>
-<div class="flex flex-col">
-<div class="flex items-center space-x-2 font-semibold text-white">
-<span>
-Kioshi
-</span>
-<span class="text-[#b0b0b0] text-lg select-none">
-•••
-</span>
-<i class="fas fa-minus-circle text-[#e03c3c] text-sm">
-</i>
-</div>
-<div>
-<span class="inline-block bg-[#3a3a40] rounded-full px-1.5 py-0.5 text-xs text-[#4a90e2] font-semibold select-none">
-#
-</span>
-</div>
-</div>
-<button class="ml-auto bg-[#5865f2] text-white text-xs font-semibold rounded-md px-3 py-1 hover:bg-[#4752c4]">
-Edit User Profile
-</button>
-</div>
-<div class="bg-[#29292e] rounded-md p-4 space-y-4 text-[13px]">
-<div class="flex justify-between items-center">
-<div>
-<div class="font-semibold text-white select-none">
-Display Name
-</div>
-<div>
-Kioshi
-</div>
-</div>
-<button class="bg-[#4a4a4f] text-[#b0b0b0] text-xs rounded-md px-3 py-1 hover:bg-[#5a5a5f]">
-Edit
-</button>
-</div>
-<div class="flex justify-between items-center">
-<div>
-<div class="font-semibold text-white select-none">
-Username
-</div>
-<div>
-kioshi29
-</div>
-</div>
-<button class="bg-[#4a4a4f] text-[#b0b0b0] text-xs rounded-md px-3 py-1 hover:bg-[#5a5a5f]">
-Edit
-</button>
-</div>
-<div class="flex justify-between items-center">
-<div>
-<div class="font-semibold text-white select-none">
-Email
-</div>
-<div>
-<span class="select-text">
-****************@gmail.com
-</span>
-<button class="text-[#4a90e2] text-xs ml-1 hover:underline">
-Reveal
-</button>
-</div>
-</div>
-<button class="bg-[#4a4a4f] text-[#b0b0b0] text-xs rounded-md px-3 py-1 hover:bg-[#5a5a5f]">
-Edit
-</button>
-</div>
-<div class="flex justify-between items-center">
-<div>
-<div class="font-semibold text-white select-none">
-Phone Number
-</div>
-<div class="flex items-center space-x-2">
-<span class="select-text">
-********6155
-</span>
-<button class="text-[#4a90e2] text-xs hover:underline">
-Reveal
-</button>
-</div>
-</div>
-<div class="flex items-center space-x-2">
-<button class="text-[#4a90e2] text-xs hover:underline">
-Remove
-</button>
-<button class="bg-[#4a4a4f] text-[#b0b0b0] text-xs rounded-md px-3 py-1 hover:bg-[#5a5a5f]">
-Edit
-</button>
-</div>
-</div>
-</div>
-</section>
-<section class="mt-8 max-w-4xl">
-<h2 class="font-semibold text-white mb-3 select-none text-[14px]">
-Password and Authentication
-</h2>
-<button class="bg-[#5865f2] text-white text-xs font-semibold rounded-md px-3 py-1 mb-4 hover:bg-[#4752c4]">
-Change Password
-</button>
-<div class="mb-4 text-[12px] text-[#b0b0b0] max-w-xl select-text leading-relaxed">
-<button class="bg-[#5865f2] text-white text-xs font-semibold rounded-md px-3 py-1 mb-6 hover:bg-[#4752c4]">
-Enable Authenticator App
-</button>
-<div class="text-[12px] text-[#b0b0b0] max-w-xl select-text">
-</div>
-</section>
-</main>
-</div>
+
+<script>
+    // Dropdown Menu Script
+    const menuIcon = document.querySelector('.menu-icon');
+    const dropdown = document.querySelector('.dropdown-menu');
+    menuIcon.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+    });
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.account-menu')) {
+            dropdown.style.display = 'none';
+        }
+    });
+
+    document.querySelectorAll('.edit-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const container = btn.closest('.detail-item');
+            const valueContainer = container.querySelector('.detail-value');
+            const span = valueContainer.querySelector('span');
+            const input = valueContainer.querySelector('input');
+            const saveBtn = container.querySelector('.save-btn');
+
+            span.classList.add('hidden');
+            input.classList.remove('hidden');
+            input.focus();
+            btn.classList.add('hidden');
+            saveBtn.classList.remove('hidden');
+        });
+    });
+
+    document.querySelectorAll('.save-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const container = btn.closest('.detail-item');
+            const valueContainer = container.querySelector('.detail-value');
+            const span = valueContainer.querySelector('span');
+            const input = valueContainer.querySelector('input');
+            const editBtn = container.querySelector('.edit-btn');
+
+            if (!span.textContent.includes('*')) {
+                span.textContent = input.value;
+            }
+            
+            input.classList.add('hidden');
+            span.classList.remove('hidden');
+            btn.classList.add('hidden');
+            editBtn.classList.remove('hidden');
+        });
+    });
+</script>
+
 </body>
 </html>
