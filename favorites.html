@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rank My Favorites</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #1e1f21;
+            color: white;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1e1f21;
+            padding: 20px;
+        }
+
+        .logo {
+            background-color: #5865f2;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .account-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 40px;
+            background-color: #222;
+            border: 1px solid #555;
+            border-radius: 8px;
+            padding: 10px;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+            transition: background 0.2s;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #444;
+        }
+        
+        .favorites-main {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+        }
+        
+        .favorites-container {
+            background-color: #2b2d31;
+            padding: 24px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            max-width: 700px;
+            width: 100%;
+        }
+        
+        .favorites-container h1 {
+            font-size: 1.8em;
+            font-weight: bold;
+            text-align: center;
+            margin: 0 0 10px 0;
+        }
+        
+        .favorites-container p {
+            text-align: center;
+            color: #ccc;
+            margin-bottom: 30px;
+        }
+
+        .candidate-rank-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        .rank-item {
+            display: flex;
+            align-items: center;
+            background-color: #3a3c51;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: grab;
+            user-select: none;
+            transition: background-color 0.2s;
+        }
+        
+        .rank-item.dragging {
+            opacity: 0.5;
+            background-color: #4a4d6e;
+        }
+        
+        .drag-handle {
+            color: #888;
+            margin-right: 15px;
+        }
+        
+        .rank-number {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ccc;
+            width: 30px;
+            text-align: center;
+            margin-right: 15px;
+        }
+
+        .candidate-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .candidate-name {
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            background-color: #5865f2;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', Courier, monospace;
+            transition: background-color 0.2s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #4752c4;
+        }
+
+        footer {
+            text-align: right;
+            padding: 20px;
+            font-size: 0.8em;
+        }
+
+        footer a {
+            color: white;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <a href="homepage.html" class="logo">ONE VOTE ONE FUTURE</a>
+            <nav>
+                <a href="homepage.html">HOME</a>
+                <a href="candidates.html">CANDIDATES</a>
+                <a href="awareness.html">AWARENESS</a>
+                <a href="report.html">REPORT</a>
+                <a href="forum.html">FORUM</a>
+            </nav>
+            <div class="account-menu">
+                <i class="fas fa-bars menu-icon"></i>
+                <div class="dropdown-menu">
+                    <a href="favorites.html">Favorites</a>
+                    <a href="settings.html">Settings</a>
+                    <a href="my-account.html">My Account</a>
+                    <a href="logout.html">Log Out</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="favorites-main">
+            <div class="favorites-container">
+                <h1>Rank Your Favorites</h1>
+                <p>Drag and drop the candidates to arrange them in your preferred order.</p>
+                
+                <ul class="candidate-rank-list" id="rank-list">
+                    <li class="rank-item" draggable="true">
+                        <i class="fas fa-grip-vertical drag-handle"></i>
+                        <span class="rank-number">1</span>
+                        <img src="https://www.rappler.com/tachyon/2025/01/MENDOZA-HEIDI.jpg?fit=300%2C300" alt="Heidi Mendoza" class="candidate-avatar">
+                        <span class="candidate-name">Heidi Mendoza</span>
+                    </li>
+                    <li class="rank-item" draggable="true">
+                        <i class="fas fa-grip-vertical drag-handle"></i>
+                        <span class="rank-number">2</span>
+                        <img src="https://www.rappler.com/tachyon/2025/01/AQUINO-BAM.jpg?fit=300%2C300" alt="Bam Aquino" class="candidate-avatar">
+                        <span class="candidate-name">Bam Aquino</span>
+                    </li>
+                    <li class="rank-item" draggable="true">
+                        <i class="fas fa-grip-vertical drag-handle"></i>
+                        <span class="rank-number">3</span>
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Senkikopangilinan.jpg/640px-Senkikopangilinan.jpg" alt="Kiko Pangilinan" class="candidate-avatar">
+                        <span class="candidate-name">Kiko Pangilinan</span>
+                    </li>
+                </ul>
+                <button type="button" class="submit-btn" id="save-ranking-btn">Save My Rankings</button>
+            </div>
+        </main>
+
+        <footer>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+        </footer>
+    </div>
+    
+    <script>
+        // --- Dropdown Menu Script ---
+        const menuIcon = document.querySelector('.menu-icon');
+        const dropdown = document.querySelector('.dropdown-menu');
+        menuIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        });
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.account-menu')) {
+                dropdown.style.display = 'none';
+            }
+        });
+
+        // --- Drag-and-Drop Ranking Script ---
+        const rankList = document.getElementById('rank-list');
+        let draggedItem = null;
+
+        rankList.addEventListener('dragstart', (e) => {
+            draggedItem = e.target;
+            setTimeout(() => {
+                e.target.classList.add('dragging');
+            }, 0);
+        });
+
+        rankList.addEventListener('dragend', (e) => {
+            setTimeout(() => {
+                e.target.classList.remove('dragging');
+                draggedItem = null;
+                updateRankings();
+            }, 0);
+        });
+
+        rankList.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const afterElement = getDragAfterElement(rankList, e.clientY);
+            if (afterElement == null) {
+                rankList.appendChild(draggedItem);
+            } else {
+                rankList.insertBefore(draggedItem, afterElement);
+            }
+        });
+        
+        function getDragAfterElement(container, y) {
+            const draggableElements = [...container.querySelectorAll('.rank-item:not(.dragging)')];
+            
+            return draggableElements.reduce((closest, child) => {
+                const box = child.getBoundingClientRect();
+                const offset = y - box.top - box.height / 2;
+                if (offset < 0 && offset > closest.offset) {
+                    return { offset: offset, element: child };
+                } else {
+                    return closest;
+                }
+            }, { offset: Number.NEGATIVE_INFINITY }).element;
+        }
+
+        function updateRankings() {
+            const items = rankList.querySelectorAll('.rank-item');
+            items.forEach((item, index) => {
+                const rankNumber = item.querySelector('.rank-number');
+                rankNumber.textContent = index + 1;
+            });
+        }
+        
+        // Save Rankings Button
+        const saveBtn = document.getElementById('save-ranking-btn');
+        saveBtn.addEventListener('click', () => {
+            const rankedCandidates = [];
+            rankList.querySelectorAll('.rank-item').forEach(item => {
+                const name = item.querySelector('.candidate-name').textContent;
+                rankedCandidates.push(name);
+            });
+            
+            let rankString = "Your rankings have been saved:\n";
+            rankedCandidates.forEach((name, index) => {
+                rankString += `${index + 1}. ${name}\n`;
+            });
+            
+            alert(rankString);
+        });
+
+    </script>
+</body>
+</html>
