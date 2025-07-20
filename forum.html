@@ -27,6 +27,7 @@
             flex: 1;
         }
 
+        /* --- UPDATED HEADER STYLES --- */
         header {
             display: flex;
             justify-content: space-between;
@@ -43,6 +44,11 @@
             font-weight: bold;
             color: white;
             text-decoration: none;
+        }
+        
+        header nav {
+            flex-grow: 1;
+            text-align: center;
         }
 
         nav a {
@@ -80,20 +86,31 @@
             border-radius: 8px;
             padding: 10px;
             flex-direction: column;
+            width: 200px;
             z-index: 1000;
         }
 
         .dropdown-menu a {
             color: white;
             text-decoration: none;
-            padding: 8px 12px;
+            padding: 10px 12px;
             display: block;
+            font-weight: bold;
         }
 
         .dropdown-menu a:hover {
             background-color: #444;
         }
         
+        .dropdown-nav-links {
+            display: none;
+            flex-direction: column;
+            border-bottom: 1px solid #444;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+        }
+        
+        /* --- Page Specific Styles --- */
         .forum-page {
             max-width: 900px;
             margin: 0 auto;
@@ -144,6 +161,7 @@
             gap: 10px;
             margin-bottom: 24px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .filter-btn {
@@ -182,8 +200,8 @@
         .thread-item:hover { border-color: #5865f2; }
         .thread-title-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
         .thread-title { font-size: 1.2em; font-weight: bold; color: #f0f0f0; margin: 0; }
-        .new-tag { background-color: #5865f2; color: white; border-radius: 5px; padding: 2px 6px; font-size: 0.7em; font-weight: bold; }
-        .thread-snippet { font-size: 0.9em; color: #aaa; margin: 0 0 12px 0; }
+        .new-tag { background-color: #5865f2; color: white; border-radius: 5px; padding: 2px 6px; font-size: 0.7em; font-weight: bold; flex-shrink: 0; }
+        .thread-snippet { font-size: 0.9em; color: #aaa; margin: 0 0 12px 0; line-height: 1.5; }
         .username { color: #ff9900; font-weight: bold; }
         .thread-meta { display: flex; align-items: center; gap: 15px; font-size: 0.8em; color: #888; }
         .comment-info { display: flex; align-items: center; gap: 5px; }
@@ -192,8 +210,9 @@
             display: none;
         }
 
+        /* --- UPDATED FOOTER STYLE --- */
         footer {
-            text-align: right;
+            text-align: center;
             padding: 20px;
             font-size: 0.8em;
             border-top: 1px solid #333;
@@ -201,9 +220,32 @@
 
         footer a {
             color: white;
-            margin-left: 10px;
+            margin: 0 10px;
             text-decoration: none;
         }
+
+        /* --- NEW RESPONSIVE STYLES --- */
+        @media (max-width: 850px) {
+            header nav {
+                display: none;
+            }
+            .dropdown-nav-links {
+                display: flex;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .forum-page {
+                padding: 15px;
+            }
+            .forum-actions-bar {
+                flex-direction: column;
+            }
+            .thread-title {
+                font-size: 1.1em;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -220,6 +262,13 @@
             <div class="account-menu">
                 <i class="fas fa-bars menu-icon"></i>
                 <div class="dropdown-menu">
+                    <div class="dropdown-nav-links">
+                        <a href="homepage.html">HOME</a>
+                        <a href="candidates.html">CANDIDATES</a>
+                        <a href="awareness.html">AWARENESS</a>
+                        <a href="report.html">REPORT</a>
+                        <a href="forum.html">FORUM</a>
+                    </div>
                     <a href="favorites.html">Favorites</a>
                     <a href="settings.html">Settings</a>
                     <a href="my-account.html">My Account</a>
