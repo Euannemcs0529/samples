@@ -1,129 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Candidate Dashboard</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Candidate Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #1e1f21;
+            color: white;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1e1f21;
+            padding: 20px;
+        }
+
+        .logo {
+            background-color: #5865f2;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .account-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 40px;
+            background-color: #222;
+            border: 1px solid #555;
+            border-radius: 8px;
+            padding: 10px;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+            transition: background 0.2s;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #444;
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 40px;
+        }
+
+        .card {
+            border: 2px solid #323342;
+            background-color: transparent;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            align-self: start;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-color: #2e2f3f;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 20px;
+        }
+
+        .card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .card-name p {
+            font-weight: bold;
+            color: white;
+            margin: 0;
+        }
+
+        .icons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .favorite-icon {
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .favorite-icon.favorited {
+            color: #facc15;
+        }
+
+        .info-icon {
+            color: #ccc;
+            cursor: default;
+        }
+
+        .details {
+            padding: 0 20px;
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.5s ease;
+        }
+
+        .card:hover .details {
+            opacity: 1;
+            max-height: 500px;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: right;
+            padding: 20px;
+            font-size: 0.8em;
+        }
+
+        footer a {
+            color: white;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr); 
+            }
+        }
+
+        @media (max-width: 480px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="wrapper">
         <header>
-            <div class="logo">ONE VOTE ONE FUTURE</div>
+            <a href="homepage.html" class="logo">ONE VOTE ONE FUTURE</a>
             <nav>
-            <a href="#">HOME</a>
-            <a href="#">CANDIDATES</a>
-            <a href="#">AWARENESS</a>
-            <a href="#">REPORT</a>
-            <a href="#">FORUM</a>
+                <a href="homepage.html">HOME</a>
+                <a href="candidates.html">CANDIDATES</a>
+                <a href="awareness.html">AWARENESS</a>
+                <a href="report.html">REPORT</a>
+                <a href="forum.html">FORUM</a>
             </nav>
             <div class="account-menu">
                 <i class="fas fa-bars menu-icon"></i>
                 <div class="dropdown-menu">
-                    <a href="#">Favorites</a>
-                    <a href="#">Settings</a>
-                    <a href="#">My Account</a>
-                    <a href="#">Log Out</a>
+                    <a href="favorites.html">Favorites</a>
+                    <a href="settings.html">Settings</a>
+                    <a href="my-account.html">My Account</a>
+                    <a href="index.html">Log Out</a>
                 </div>
-             </div>
-
+            </div>
         </header>
-
+        
         <main>
             <div class="grid">
-            <div class="card">
-                <div class="card-header">
-                <img src="https://www.rappler.com/tachyon/2025/01/MENDOZA-HEIDI.jpg?fit=300%2C300" alt="Heidi Mendoza">
-                <div class="card-name"><p>Heidi Mendoza</p></div>
-                <div class="icons">
-                    <i class="fas fa-star favorite-icon" title="Favorite"></i>
-                    <i class="fas fa-info-circle info-icon" title="Source: Rappler.com"></i>
+                <div class="card">
+                    <div class="card-header">
+                        <img src="https://www.rappler.com/tachyon/2025/01/MENDOZA-HEIDI.jpg?fit=300%2C300" alt="Heidi Mendoza">
+                        <div class="card-name"><p>Heidi Mendoza</p></div>
+                        <div class="icons">
+                            <i class="fas fa-star favorite-icon" title="Favorite"></i>
+                            <i class="fas fa-info-circle info-icon" title="Source: Rappler.com"></i>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p><strong>Background:</strong> Former COA Commissioner and UN official known for transparency and accountability advocacy.</p>
+                        <p><strong>Platform:</strong> Anti-corruption, fiscal transparency, good governance.</p>
+                    </div>
                 </div>
-                </div>
-                <div class="details">
-                <p><strong>Background:</strong> Former COA Commissioner and UN official known for transparency and accountability advocacy.</p>
-                <p><strong>Platform:</strong> Anti-corruption, fiscal transparency, good governance.</p>
-                </div>
-            </div>
 
-            <div class="card">
-                <div class="card-header">
-                <img src="https://www.rappler.com/tachyon/2025/01/AQUINO-BAM.jpg?fit=300%2C300" alt="Bam Aquino">          
-                <div class="card-name"><p>Bam Aquino</p></div>
-                <div class="icons">
-                    <i class="fas fa-star favorite-icon" title="Favorite"></i>
-                    <i class="fas fa-info-circle info-icon" title="Source: Rappler.com"></i>
+                <div class="card">
+                    <div class="card-header">
+                        <img src="https://www.rappler.com/tachyon/2025/01/AQUINO-BAM.jpg?fit=300%2C300" alt="Bam Aquino">                       
+                        <div class="card-name"><p>Bam Aquino</p></div>
+                        <div class="icons">
+                            <i class="fas fa-star favorite-icon" title="Favorite"></i>
+                            <i class="fas fa-info-circle info-icon" title="Source: Rappler.com"></i>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p><strong>Background:</strong> Former senator and youth advocate.</p>
+                        <p><strong>Platform:</strong> Education reform, tech innovation, youth employment.</p>
+                    </div>
                 </div>
-                </div>
-                <div class="details">
-                <p><strong>Background:</strong> Former senator and youth advocate.</p>
-                <p><strong>Platform:</strong> Education reform, tech innovation, youth employment.</p>
-                </div>
-            </div>
 
-            <div class="card">
-                <div class="card-header">
-                <img src="https://www.rappler.com/tachyon/2025/01/ESPIRITU-LUKE.jpg?fit=300%2C300" alt="Luke Espiritu">
-                <div class="card-name"><p>Luke Espiritu</p></div>
-                <div class="icons">
-                    <i class="fas fa-star favorite-icon" title="Favorite"></i>
-                    <i class="fas fa-info-circle info-icon" title="Source: Rappler.com"></i>
+                <div class="card">
+                    <div class="card-header">
+                        <img src="https://www.rappler.com/tachyon/2025/01/ESPIRITU-LUKE.jpg?fit=300%2C300" alt="Luke Espiritu">
+                        <div class="card-name"><p>Luke Espiritu</p></div>
+                        <div class="icons">
+                            <i class="fas fa-star favorite-icon" title="Favorite"></i>
+                            <i class="fas fa-info-circle info-icon" title="Source: Rappler.com"></i>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p><strong>Background:</strong> Labor rights lawyer and activist.</p>
+                        <p><strong>Platform:</strong> Workers' rights, anti-oligarchy, grassroots empowerment.</p>
+                    </div>
                 </div>
-                </div>
-                <div class="details">
-                <p><strong>Background:</strong> Labor rights lawyer and activist.</p>
-                <p><strong>Platform:</strong> Workers' rights, anti-oligarchy, grassroots empowerment.</p>
-                </div>
-            </div>
 
-            <div class="card">
-                <div class="card-header">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Senkikopangilinan.jpg/640px-Senkikopangilinan.jpg" alt="Kiko Pangilinan">          
-                <div class="card-name"><p>Kiko Pangilinan</p></div>
-                <div class="icons">
-                    <i class="fas fa-star favorite-icon" title="Favorite"></i>
-                    <i class="fas fa-info-circle info-icon" title="Source: Rappler.com"></i>
+                <div class="card">
+                    <div class="card-header">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Senkikopangilinan.jpg/640px-Senkikopangilinan.jpg" alt="Kiko Pangilinan">                       
+                        <div class="card-name"><p>Kiko Pangilinan</p></div>
+                        <div class="icons">
+                            <i class="fas fa-star favorite-icon" title="Favorite"></i>
+                            <i class="fas fa-info-circle info-icon" title="Source: Rappler.com"></i>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p><strong>Background:</strong> Former senator and food security advocate.</p>
+                        <p><strong>Platform:</strong> Agriculture, farmers' rights, food self-sufficiency.</p>
+                    </div>
                 </div>
-                </div>
-                <div class="details">
-                <p><strong>Background:</strong> Former senator and food security advocate.</p>
-                <p><strong>Platform:</strong> Agriculture, farmers' rights, food self-sufficiency.</p>
-                </div>
-            </div>
 
-            <div class="card">
-                <div class="card-header">
-                <img src="https://pdplaban.org.ph/wp-content/uploads/2024/01/Bato-Dela-Rosa.webp" alt="Bato Dela Rosa">          
-                <div class="card-name"><p>Bato Dela Rosa</p></div>
-                <div class="icons">
-                    <i class="fas fa-star favorite-icon" title="Favorite"></i>
-                    <i class="fas fa-info-circle info-icon" title="Source: Rappler.com"></i>
+                <div class="card">
+                    <div class="card-header">
+                        <img src="https://pdplaban.org.ph/wp-content/uploads/2024/01/Bato-Dela-Rosa.webp" alt="Bato Dela Rosa">                       
+                        <div class="card-name"><p>Bato Dela Rosa</p></div>
+                        <div class="icons">
+                            <i class="fas fa-star favorite-icon" title="Favorite"></i>
+                            <i class="fas fa-info-circle info-icon" title="Source: Rappler.com"></i>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p><strong>Background:</strong> Former PNP Chief and senator.</p>
+                        <p><strong>Platform:</strong> Law enforcement, anti-crime, drug prevention.</p>
+                    </div>
                 </div>
-                </div>
-                <div class="details">
-                <p><strong>Background:</strong> Former PNP Chief and senator.</p>
-                <p><strong>Platform:</strong> Law enforcement, anti-crime, drug prevention.</p>
-                </div>
-            </div>
 
-            <div class="card">
-                <div class="card-header">
-                <img src="https://pdplaban.org.ph/wp-content/uploads/2024/01/Bong-Go.webp" alt="Bong Go">          
-                <div class="card-name"><p>Bong Go</p></div>
-                <div class="icons">
-                    <i class="fas fa-star favorite-icon" title="Favorite"></i>
-                    <i class="fas fa-info-circle info-icon" title="Source: Rappler.com"></i>
+                <div class="card">
+                    <div class="card-header">
+                        <img src="https://pdplaban.org.ph/wp-content/uploads/2024/01/Bong-Go.webp" alt="Bong Go">                       
+                        <div class="card-name"><p>Bong Go</p></div>
+                        <div class="icons">
+                            <i class="fas fa-star favorite-icon" title="Favorite"></i>
+                            <i class="fas fa-info-circle info-icon" title="Source: Rappler.com"></i>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <p><strong>Background:</strong> Senator and close aide of President Duterte.</p>
+                        <p><strong>Platform:</strong> Health services, housing, disaster response.</p>
+                    </div>
                 </div>
-                </div>
-                <div class="details">
-                <p><strong>Background:</strong> Senator and close aide of President Duterte.</p>
-                <p><strong>Platform:</strong> Health services, housing, disaster response.</p>
-                </div>
-            </div>
-
-
-            <!-- Repeat similar structure for other candidates here -->
 
             </div>
         </main>
@@ -133,25 +315,27 @@
             <a href="#">Terms & Conditions</a>
         </footer>
     </div>
-        <script> // JavaScript for interactivity
-            document.querySelectorAll('.favorite-icon').forEach(icon => {
+
+    <script>
+        document.querySelectorAll('.favorite-icon').forEach(icon => {
             icon.addEventListener('click', () => {
                 icon.classList.toggle('favorited');
             });
-            });
+        });
 
-            const menuIcon = document.querySelector('.menu-icon');
-            const dropdown = document.querySelector('.dropdown-menu');
+        const menuIcon = document.querySelector('.menu-icon');
+        const dropdown = document.querySelector('.dropdown-menu');
 
-            menuIcon.addEventListener('click', () => {
+        menuIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
             dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
-            });
+        });
 
-            document.addEventListener('click', (e) => {
+        document.addEventListener('click', (e) => {
             if (!e.target.closest('.account-menu')) {
-            dropdown.style.display = 'none';
+                dropdown.style.display = 'none';
             }
-     });
-        </script>
-    </body>
+        });
+    </script>
+</body>
 </html>
