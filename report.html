@@ -27,12 +27,14 @@
             flex: 1;
         }
 
+        /* --- UPDATED HEADER STYLES --- */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background-color: #1e1f21;
             padding: 20px;
+            border-bottom: 1px solid #333;
         }
 
         .logo {
@@ -42,6 +44,11 @@
             font-weight: bold;
             color: white;
             text-decoration: none;
+        }
+        
+        header nav {
+            flex-grow: 1;
+            text-align: center;
         }
 
         nav a {
@@ -75,21 +82,32 @@
             border-radius: 8px;
             padding: 10px;
             flex-direction: column;
+            width: 200px;
             z-index: 1000;
         }
 
         .dropdown-menu a {
             color: white;
             text-decoration: none;
-            padding: 8px 12px;
+            padding: 10px 12px;
             display: block;
             transition: background 0.2s;
+            font-weight: bold;
         }
 
         .dropdown-menu a:hover {
             background-color: #444;
         }
+
+        .dropdown-nav-links {
+            display: none;
+            flex-direction: column;
+            border-bottom: 1px solid #444;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+        }
         
+        /* --- Page Specific Styles --- */
         .report-main {
             display: flex;
             justify-content: center;
@@ -157,16 +175,29 @@
             background-color: #4752c4;
         }
 
+        /* --- UPDATED FOOTER STYLE --- */
         footer {
-            text-align: right;
+            text-align: center;
             padding: 20px;
             font-size: 0.8em;
+            border-top: 1px solid #333;
         }
 
         footer a {
             color: white;
-            margin-left: 10px;
+            margin: 0 10px;
             text-decoration: none;
+        }
+        
+        /* --- NEW RESPONSIVE STYLES --- */
+        @media (max-width: 850px) {
+            header nav {
+                display: none;
+            }
+            
+            .dropdown-nav-links {
+                display: flex;
+            }
         }
     </style>
 </head>
@@ -184,6 +215,13 @@
             <div class="account-menu">
                 <i class="fas fa-bars menu-icon"></i>
                 <div class="dropdown-menu">
+                    <div class="dropdown-nav-links">
+                        <a href="homepage.html">HOME</a>
+                        <a href="candidates.html">CANDIDATES</a>
+                        <a href="awareness.html">AWARENESS</a>
+                        <a href="report.html">REPORT</a>
+                        <a href="forum.html">FORUM</a>
+                    </div>
                     <a href="favorites.html">Favorites</a>
                     <a href="settings.html">Settings</a>
                     <a href="my-account.html">My Account</a>
@@ -231,6 +269,7 @@
             }
         });
 
+        // Report Form Submission Script
         document.getElementById('reportForm').addEventListener('submit', function(e) {
             e.preventDefault();
             alert('✅ Your report has been submitted successfully!');
