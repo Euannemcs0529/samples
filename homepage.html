@@ -1,288 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>
-   One Vote One Future
-  </title>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <style>
-   /* Custom scrollbar for timeline and right sidebar */
-    .scrollbar-thin::-webkit-scrollbar {
-      width: 6px;
-    }
-    .scrollbar-thin::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .scrollbar-thin::-webkit-scrollbar-thumb {
-      background-color: #555;
-      border-radius: 3px;
-    }
-    /* Set background color for body and main elements */
-    body {
-      background-color: #23272a;
-      color: white; /* Keep text color white */
-    }
-    /* Set background color for specific sections */
-    nav, main, aside {
-      background-color: #23272a;
-    }
-    /* Keep buttons with their original styles */
-    button {
-      background-color: #5865f2; /* Default button background color */
-      color: white; /* Button text color */
-    }
-    /* Specific style for the Post button */
-    .post-button {
-      background-color: #5865f2; /* Post button background color */
-    }
-  </style>
- </head>
- <body class="font-sans min-h-screen flex">
-  <!-- Left Sidebar -->
-  <nav class="flex flex-col w-20 sm:w-64 border-r border-[#23272a] p-4">
-   <ul class="flex flex-col space-y-4 text-sm sm:text-base">
-    <li class="flex items-center space-x-3 font-bold text-white">
-     <i class="fas fa-home text-lg">
-     </i>
-     <a href="homepage.html" class="hidden sm:inline">Home</a>
-    </li>
-    <li class="flex items-center space-x-3 text-[#d9d9d9] hover:text-white cursor-pointer">
-     <i class="fas fa-search text-lg">
-     </i>
-     <span class="hidden sm:inline">Search</span>
-    </li>
-    <li class="flex items-center space-x-3 text-[#d9d9d9] hover:text-white cursor-pointer relative">
-     <i class="far fa-bell text-lg">
-     </i>
-     <span class="hidden sm:inline">Notifications</span>
-    </li>
-    <li class="flex items-center space-x-3 text-[#d9d9d9] hover:text-white cursor-pointer">
-     <i class="far fa-envelope text-lg">
-     </i>
-     <a href="forum.html" class="hidden sm:inline">Messages</a>
-    </li>
-    <li class="flex items-center space-x-3 text-[#d9d9d9] hover:text-white cursor-pointer">
-     <i class="fas fa-ban text-lg">
-     </i>
-     <a href="report.html" class="hidden sm:inline">Report</a>
-    </li>
-    <li class="flex items-center space-x-3 text-[#d9d9d9] hover:text-white cursor-pointer">
-     <i class="far fa-bookmark text-lg">
-     </i>
-     <span class="hidden sm:inline">Bookmarks</span>
-    </li>
-    <li class="flex items-center space-x-3 text-[#d9d9d9] hover:text-white cursor-pointer">
-     <i class="fas fa-users text-lg">
-     </i>
-     <a href="candidates.html" class="hidden sm:inline">Candidates</a>
-    </li>
-    <li class="flex items-center space-x-3 text-[#d9d9d9] hover:text-white cursor-pointer">
-     <i class="fas fa-bolt text-lg">
-     </i>
-     <a href="awareness.html" class="hidden sm:inline">Awareness</a>
-    </li>
-    <li class="flex items-center space-x-3 text-[#d9d9d9] hover:text-white cursor-pointer">
-     <i class="far fa-user text-lg">
-     </i>
-     <a href="my-account.html" class="hidden sm:inline">Profile</a>
-    </li>
-   </ul>
-   <button class="mt-auto post-button hover:bg-[#4e6bbf] rounded-full py-2 px-8 font-bold text-sm sm:text-base w-full" type="button">
-    Post
-   </button>
-   <div class="mt-6 flex items-center space-x-3">
-    <img alt="Profile picture of user yohan" class="rounded-full w-10 h-10" height="40" src="https://storage.googleapis.com/a1aa/image/3b1203cc-4836-492e-121c-cd0633154422.jpg" width="40"/>
-    <div class="hidden sm:flex flex-col text-sm">
-     <span class="font-bold">
-      yohan
-     </span>
-     <span class="text-[#8899a6]">
-      @euannemcs_
-     </span>
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>One Vote One Future - Home</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #1e1f21;
+            color: white;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 100vh;
+        }
+        
+        main {
+            flex: 1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1e1f21;
+            padding: 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            background-color: #5865f2;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        
+        header nav {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        
+        .account-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 40px;
+            background-color: #222;
+            border: 1px solid #555;
+            border-radius: 8px;
+            padding: 10px;
+            flex-direction: column;
+            width: 200px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 12px;
+            display: block;
+            transition: background 0.2s;
+            font-weight: bold;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #444;
+        }
+
+        .dropdown-nav-links {
+            display: none;
+            flex-direction: column;
+            border-bottom: 1px solid #444;
+            margin-bottom: 8px;
+            padding-bottom: 8px;
+        }
+        
+        .homepage-main {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .post-feed {
+            max-width: 700px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .post-item {
+            display: flex;
+            gap: 15px;
+            padding: 16px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .post-item:first-child {
+            padding-top: 0;
+        }
+
+        .post-item .profile-pic {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .post-content {
+            flex-grow: 1;
+        }
+
+        .post-author-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+
+        .post-author-info .name {
+            font-weight: bold;
+        }
+        
+        .post-author-info .handle-time {
+            color: #888;
+        }
+
+        .post-body {
+            font-size: 0.95em;
+            line-height: 1.5;
+            margin: 5px 0 12px 0;
+            word-wrap: break-word;
+        }
+        
+        .post-body .post-image {
+            width: 100%;
+            height: auto;
+            border-radius: 16px;
+            margin-top: 10px;
+            border: 1px solid #444;
+        }
+
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            max-width: 450px;
+            color: #888;
+            font-size: 0.8em;
+        }
+        
+        .action-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* EDITED FOOTER STYLE */
+        footer {
+            text-align: center; /* Changed from 'right' to 'center' */
+            padding: 20px;
+            font-size: 0.8em;
+            border-top: 1px solid #333;
+        }
+
+        footer a {
+            color: white;
+            margin: 0 10px; /* Changed from 'margin-left' for better centering */
+            text-decoration: none;
+        }
+        
+        /* --- RESPONSIVE STYLES --- */
+        @media (max-width: 850px) {
+            header nav {
+                display: none;
+            }
+            
+            .dropdown-nav-links {
+                display: flex;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .homepage-main {
+                padding: 10px;
+            }
+            
+            .post-item {
+                gap: 10px;
+            }
+
+            .post-item .profile-pic {
+                width: 40px;
+                height: 40px;
+            }
+
+            .post-actions {
+                max-width: 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <div class="logo">ONE VOTE ONE FUTURE</div>
+            <nav>
+                <a href="homepage.html">HOME</a>
+                <a href="candidates.html">CANDIDATES</a>
+                <a href="awareness.html">AWARENESS</a>
+                <a href="report.html">REPORT</a>
+                <a href="forum.html">FORUM</a>
+            </nav>
+            <div class="account-menu">
+                <i class="fas fa-bars menu-icon"></i>
+                <div class="dropdown-menu">
+                    <div class="dropdown-nav-links">
+                        <a href="homepage.html">HOME</a>
+                        <a href="candidates.html">CANDIDATES</a>
+                        <a href="awareness.html">AWARENESS</a>
+                        <a href="report.html">REPORT</a>
+                        <a href="forum.html">FORUM</a>
+                    </div>
+                    <a href="favorites.html">Favorites</a>
+                    <a href="settings.html">Settings</a>
+                    <a href="my-account.html">My Account</a>
+                    <a href="index.html">Log Out</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="homepage-main">
+            <div class="post-feed">
+                <article class="post-item">
+                    <img src="https://i.pinimg.com/236x/4c/84/e8/4c84e810b6dffc2ec95ea8e3aa718216.jpg" alt="Profile picture" class="profile-pic">
+                    <div class="post-content">
+                        <div class="post-author-info">
+                            <span class="name">Chichi</span>
+                            <span class="handle-time">@bossChi_ · 16h</span>
+                        </div>
+                        <p class="post-body">What are your thought about the upcoming elections?</p>
+                        <div class="post-actions">
+                            <div class="action-item"><i class="far fa-comment"></i><span>117</span></div>
+                            <div class="action-item"><i class="fas fa-retweet"></i><span>108</span></div>
+                            <div class="action-item"><i class="far fa-heart"></i><span>3.4K</span></div>
+                            <div class="action-item"><i class="fas fa-chart-bar"></i><span>611K</span></div>
+                            <div class="action-item"><i class="far fa-bookmark"></i></div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSpG5QwrOm3lb4urLgpqF5VeIHKJN5mDzrkJfvq5GwDnP-IU71fIoOBFmKz1BMUPX1nvJA&usqp=CAU" alt="Profile picture" class="profile-pic">
+                    <div class="post-content">
+                        <div class="post-author-info">
+                            <span class="name">Pinakbet</span>
+                            <span class="handle-time">@TortangPakbet · 21h</span>
+                        </div>
+                        <p class="post-body">I've seen former Vice President Leni Robledo and the late Senator Miriam Defensor Santiago promote Heidi Mendoza, two people i deeply respected. Vote Wisely, kabataan!</p>
+                        <div class="post-actions">
+                            <div class="action-item"><i class="far fa-comment"></i><span>68</span></div>
+                            <div class="action-item"><i class="fas fa-retweet"></i><span>4.7K</span></div>
+                            <div class="action-item"><i class="far fa-heart"></i><span>22K</span></div>
+                            <div class="action-item"><i class="fas fa-chart-bar"></i><span>453K</span></div>
+                            <div class="action-item"><i class="far fa-bookmark"></i></div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="post-item">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9l3KLgpCTxEdlfOgtZrtbAE8T48G8MKlCXyvjqWg3ZYoXOH6192BYlWhGwx5zIAqeD-Y&usqp=CAU" alt="Profile picture" class="profile-pic">
+                    <div class="post-content">
+                        <div class="post-author-info">
+                            <span class="name">Andeng</span>
+                            <span class="handle-time">@Andeng123 · Jun 18</span>
+                        </div>
+                        <p class="post-body">
+                            I know it's fun to share memes about senatorial candidates like Willie or Bong Revilla, ayoko rin maging KJ. However, the more we share memes about them, the more they become familiar sa masa, which increases their chances of ending up on people's ballots. If we really want to push for good governance, mas strategic if we use our platforms to promote candidates who truly deserve the spot. The more we amplify their names and platforms, the better their chances of becoming familiar to the public. Let’s face it that in the Philippines, elections are often a popularity contest. So why not help deserving candidates become more popular instead?
+                            <img src="https://i.ytimg.com/vi/OMje0ad3ezg/maxresdefault.jpg" alt="Post image" class="post-image">
+                        </p>
+                        <div class="post-actions">
+                            <div class="action-item"><i class="far fa-comment"></i><span>78</span></div>
+                            <div class="action-item"><i class="fas fa-retweet"></i><span>2.2K</span></div>
+                            <div class="action-item"><i class="far fa-heart"></i><span>19K</span></div>
+                            <div class="action-item"><i class="fas fa-chart-bar"></i><span>673K</span></div>
+                            <div class="action-item"><i class="far fa-bookmark"></i></div>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </main>
+
+        <footer>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+        </footer>
     </div>
-    <i class="fas fa-ellipsis-h ml-auto hidden sm:block text-[#8899a6] cursor-pointer">
-    </i>
-   </div>
-  </nav>
-  <!-- Main Timeline -->
-  <main class="flex-1 border-x border-[#23272a] max-w-xl min-w-0 flex flex-col">
-   <header class="sticky top-0 border-b border-[#38444d] flex items-center justify-between px-4 py-2 z-10">
-    <h1 class="text-xl font-bold text-white">
-     Home
-    </h1>
-    <i class="fas fa-star text-[#5865f2] text-lg cursor-pointer">
-    </i>
-   </header>
-   <nav class="flex border-b border-[#38444d] text-[#8899a6] text-sm font-semibold">
-    <button class="flex-1 py-3 border-b-4 border-[#5865f2] text-white" type="button">
-     For you
-    </button>
-    <button class="flex-1 py-3 hover:bg-[#22303c]" type="button">
-     Following
-    </button>
-   </nav>
-   <section class="flex-1 overflow-y-auto scrollbar-thin px-4 py-2 space-y-4">
-    <!-- Tweet 1 -->
-    <article class="flex space-x-3">
-     <img alt="Profile picture of Auntie Selina with orange background" class="w-12 h-12 rounded-full flex-shrink-0" height="48" src="https://storage.googleapis.com/a1aa/image/8e193e3e-6090-40db-758c-11bc28bd399f.jpg" width="48"/>
-     <div class="flex-1">
-      <div class="flex items-center space-x-2 text-sm">
-       <span class="font-bold text-white">
-        Username
-       </span>
-       <span class="text-[#8899a6]">
-        @username_ · 16h
-       </span>
-      </div>
-      <p class="text-sm text-white leading-snug mt-1">
-       What are your thought about the upcoming elections? 
-      </p>
-      <div class="flex items-center justify-between text-[#8899a6] text-xs mt-2 max-w-md">
-       <div class="flex items-center space-x-1">
-        <i class="far fa-comment">
-        </i>
-        <span>
-         117
-        </span>
-       </div>
-       <div class="flex items-center space-x-1">
-        <i class="fas fa-retweet">
-        </i>
-        <span>
-         108
-        </span>
-       </div>
-       <div class="flex items-center space-x-1">
-        <i class="far fa-heart">
-        </i>
-        <span>
-         3.4K
-        </span>
-       </div>
-       <div class="flex items-center space-x-1">
-        <i class="fas fa-chart-bar">
-        </i>
-        <span>
-         611K
-        </span>
-       </div>
-       <i class="far fa-bookmark cursor-pointer">
-       </i>
-       <i class="fas fa-share cursor-pointer">
-       </i>
-      </div>
-     </div>
-    </article>
-    <!-- Tweet 2 -->
-    <article class="flex space-x-3">
-     <img alt="Profile picture of user @omgsidewalks with yellow background" class="w-12 h-12 rounded-full flex-shrink-0" height="48" src="https://storage.googleapis.com/a1aa/image/064f3b97-f011-4fce-c879-3166cad7b62b.jpg" width="48"/>
-     <div class="flex-1">
-      <div class="flex items-center space-x-2 text-sm">
-       <span class="font-bold text-white">
-        Username
-       </span>
-       <span class="text-[#8899a6]">
-        · 21h
-       </span>
-      </div>
-      <p class="text-sm text-white leading-snug mt-1">
-       I've seen former Vice President Leni Robledo and the late Senator Miriam Defensor Santiago
-       promote Heidi Mendoza, two people i deeply respected. Vote Wisely, kabataan!
-      </p>
-      <div class="flex items-center justify-between text-[#8899a6] text-xs mt-2 max-w-md">
-       <div class="flex items-center space-x-1">
-        <i class="far fa-comment">
-        </i>
-        <span>
-         68
-        </span>
-       </div>
-       <div class="flex items-center space-x-1">
-        <i class="fas fa-retweet">
-        </i>
-        <span>
-         4.7K
-        </span>
-       </div>
-       <div class="flex items-center space-x-1">
-        <i class="far fa-heart">
-        </i>
-        <span>
-         22K
-        </span>
-       </div>
-       <div class="flex items-center space-x-1">
-        <i class="fas fa-chart-bar">
-        </i>
-        <span>
-         453K
-        </span>
-       </div>
-       <i class="far fa-bookmark cursor-pointer">
-       </i>
-       <i class="fas fa-share cursor-pointer">
-       </i>
-      </div>
-     </div>
-    </article>
-    <!-- Tweet 3 -->
-    <article class="flex space-x-3">
-     <img alt="Profile picture of user siobhan with orange background" class="w-12 h-12 rounded-full flex-shrink-0" height="48" src="https://storage.googleapis.com/a1aa/image/74a861bf-919d-4ece-ba7e-6caa541ed1da.jpg" width="48"/>
-     <div class="flex-1">
-      <div class="flex items-center space-x-2 text-sm">
-       <span class="font-bold text-white">
-        usourname
-       </span>
-       <span class="text-[#8899a6]">
-        @usourname · Jun 18
-       </span>
-      </div>
-      <p class="text-sm text-white leading-snug mt-1">
-       I know it's fun to share memes about senatorial candidates like Willie or Bong Revilla, ayoko rin maging KJ. 
-       However, the more we share memes about them, the more they become familiar sa masa, which increases their chances of ending up on people's ballots.
-       If we really want to push for good governance, mas strategic if we use our platforms to promote candidates who truly deserve the spot. 
-       The more we amplify their names and platforms, the better their chances of becoming familiar to the public.
-       Let’s face it that in the Philippines, elections are often a popularity contest. So why not help deserving candidates become more popular instead?
-      </p>
-      <img alt="TV news scene showing people standing in a room with a blue news banner and GMA logo" class="mt-2 rounded-lg max-w-full" height="270" src="https://storage.googleapis.com/a1aa/image/99951b18-545d-4c4d-ffba-f1b92293cd6c.jpg" width="480"/>
-      <div class="flex items-center justify-between text-[#8899a6] text-xs mt-2 max-w-md">
-       <div class="flex items-center space-x-1">
-        <i class="far fa-comment">
-        </i>
-        <span>
-         78
-        </span>
-       </div>
-       <div class="flex items-center space-x-1">
-        <i class="fas fa-retweet">
-        </i>
-        <span>
-         2.2K
-        </span>
-       </div>
-       <div class="flex items-center space-x-1">
-        <i class="far fa-heart">
-        </i>
-        <span>
-         19K
-        </span>
-       </div>
-       <div class="flex items-center space-x-1">
-        <i class="fas fa-chart-bar">
-        </i>
-        <span>
-         673K
-        </span>
-       </div>
-       <i class="far fa-bookmark cursor-pointer">
-       </i>
-       <i class="fas fa-share cursor-pointer">
-       </i>
-      </div>
-     </div>
-    </article>
-   
+    
+    <script>
+        const menuIcon = document.querySelector('.menu-icon');
+        const dropdown = document.querySelector('.dropdown-menu');
+
+        menuIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.account-menu')) {
+                dropdown.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
