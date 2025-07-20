@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Report</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #1e1f21;
+            color: white;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 100vh;
+        }
+        
+        main {
+            flex: 1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1e1f21;
+            padding: 20px;
+        }
+
+        .logo {
+            background-color: #5865f2;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+
+        .account-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 40px;
+            background-color: #222;
+            border: 1px solid #555;
+            border-radius: 8px;
+            padding: 10px;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+            transition: background 0.2s;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #444;
+        }
+        
+        .report-main {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+        }
+        
+        .form-container {
+            background-color: #2b2d31;
+            padding: 24px;
+            border-radius: 8px;
+            border: 1px solid #444;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        .form-container h2 {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 0 0 24px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            background-color: #3a3c51;
+            border: 1px solid #444;
+            border-radius: 5px;
+            padding: 10px;
+            color: white;
+            font-family: 'Courier New', Courier, monospace;
+            box-sizing: border-box;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #5865f2;
+        }
+        
+        .submit-btn {
+            background-color: #5865f2;
+            color: white;
+            font-weight: bold;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Courier New', Courier, monospace;
+            transition: background-color 0.2s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #4752c4;
+        }
+
+        footer {
+            text-align: right;
+            padding: 20px;
+            font-size: 0.8em;
+        }
+
+        footer a {
+            color: white;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <a href="homepage.html" class="logo">ONE VOTE ONE FUTURE</a>
+            <nav>
+                <a href="homepage.html">HOME</a>
+                <a href="candidates.html">CANDIDATES</a>
+                <a href="awareness.html">AWARENESS</a>
+                <a href="report.html">REPORT</a>
+                <a href="forum.html">FORUM</a>
+            </nav>
+            <div class="account-menu">
+                <i class="fas fa-bars menu-icon"></i>
+                <div class="dropdown-menu">
+                    <a href="favorites.html">Favorites</a>
+                    <a href="settings.html">Settings</a>
+                    <a href="my-account.html">My Account</a>
+                    <a href="index.html">Log Out</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="report-main">
+            <div class="form-container">
+                <h2>Submit a Report</h2>
+                <form id="reportForm">
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject" placeholder="Enter report subject" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="details">Details</label>
+                        <textarea id="details" rows="6" placeholder="Describe the issue..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        Submit Report
+                    </button>
+                </form>
+            </div>
+        </main>
+
+        <footer>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+        </footer>
+    </div>
+    
+    <script>
+        // Dropdown Menu Script
+        const menuIcon = document.querySelector('.menu-icon');
+        const dropdown = document.querySelector('.dropdown-menu');
+        menuIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        });
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.account-menu')) {
+                dropdown.style.display = 'none';
+            }
+        });
+
+        document.getElementById('reportForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('✅ Your report has been submitted successfully!');
+            this.reset();
+        });
+    </script>
+</body>
+</html>
