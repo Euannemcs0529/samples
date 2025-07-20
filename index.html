@@ -1,77 +1,277 @@
 <!DOCTYPE html>
 <html lang="en">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>
-   One Vote One Future
-  </title>
-  <script src="https://cdn.tailwindcss.com">
-  </script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <style>
-   @import url('https://fonts.googleapis.com/css2?family=Whitney:wght@700&display=swap');
-    body {
-      font-family: 'Whitney', sans-serif;
-    }
-  </style>
- </head>
- <body class="bg-[#23272a] text-white">
-  <header class="w-full border-b border-[#2c2f33]">
-   <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <ul class="flex justify-center space-x-8 text-[11px] font-semibold pt-4 pb-3 select-none">
-     <li>
-      <a class="hover:underline" href="homepage.html">
-       HOME
-      </a>
-     </li>
-     <li>
-      <a class="hover:underline" href="candidates.html">
-       CANDIDATES
-      </a>
-     </li>
-     <li>
-      <a class="hover:underline" href="#">
-       AWARENESS
-      </a>
-     </li>
-     <li>
-        <a class="hover:underline" href="#">
-         REPORT
-        </a>
-       </li>
-       <li>
-        <a class="hover:underline" href="#">
-         FORUM
-        </a>
-       </li>
-    </ul>
-   </nav>
-  </header>
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-center min-h-[calc(100vh-40px)]">
-   <section class="md:w-1/2 text-center md:text-left">
-    <h1 class="text-white font-extrabold text-[32px] leading-[38px] md:text-[40px] md:leading-[48px] max-w-md">
-     ONE 
-     <br/>
-     VOTE
-     <br/>
-     ONE FUTURE
-    </h1>
-    <p class="text-[13px] font-normal mt-3 max-w-md text-white/90">
-     One Vote, One Future is a web application designed to provide legal-aged students (18 years old and above) with reliable and accessible political education.
-    </p>
-    <div class="mt-8 flex justify-center md:justify-start space-x-4">
-     <a href="login.html" aria-label="Login" class="bg-gradient-to-r from-[#f6f8fa] to-[#e3e7e8] text-[#23272a] text-[13px] font-semibold rounded-md px-6 py-2 flex items-center justify-center">
-      Login
-     </a>
-     <a href="create-account.html" aria-label="Sign Up" class="bg-gradient-to-r from-[#5865f2] to-[#4752c4] text-white text-[13px] font-semibold rounded-md px-6 py-2 flex items-center justify-center">
-      Sign Up
-     </a>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>One Vote One Future</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        /* Base styles for consistency */
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #1e1f21;
+            color: white;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        main {
+            flex: 1;
+        }
+
+        /* --- CONSISTENT HEADER STYLES --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #1e1f21;
+            padding: 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            background-color: #5865f2;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        header nav {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+            font-weight: bold;
+        }
+        
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        .account-menu {
+            position: relative;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .menu-icon {
+            font-size: 24px;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 40px;
+            background-color: #222;
+            border: 1px solid #555;
+            border-radius: 8px;
+            padding: 10px;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            display: block;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #444;
+        }
+
+        /* --- LANDING PAGE STYLES --- */
+        .landing-main {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .landing-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1100px;
+            width: 100%;
+            gap: 40px;
+        }
+
+        .landing-text {
+            flex-basis: 50%;
+        }
+
+        .landing-text h1 {
+            font-size: 3em;
+            font-weight: bold;
+            line-height: 1.1;
+            margin: 0 0 15px 0;
+        }
+
+        .landing-text p {
+            font-size: 1.1em;
+            line-height: 1.6;
+            color: #ccc;
+            max-width: 500px;
+        }
+        
+        .landing-buttons {
+            margin-top: 30px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1em;
+            border: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn-light {
+            background-color: #f0f0f0;
+            color: #1e1f21;
+        }
+        
+        .btn-primary {
+            background-color: #5865f2;
+            color: white;
+        }
+
+        .landing-image {
+            flex-basis: 50%;
+            text-align: center;
+        }
+        
+        .landing-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* --- RESPONSIVE STYLES --- */
+        @media (max-width: 850px) {
+            /* On smaller screens, hide the main navigation links to save space */
+            header nav {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .landing-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .landing-text {
+                text-align: center;
+            }
+
+            .landing-text h1 {
+                font-size: 2.5em;
+            }
+            
+            .landing-text p {
+                max-width: 100%;
+            }
+
+            .landing-buttons {
+                justify-content: center;
+            }
+
+            .landing-image {
+                margin-top: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- This is the full, consistent header -->
+        <header>
+            <a href="homepage.html" class="logo">ONE VOTE ONE FUTURE</a>
+            <nav>
+                <a href="homepage.html">HOME</a>
+                <a href="candidates.html">CANDIDATES</a>
+                <a href="awareness.html">AWARENESS</a>
+                <a href="report.html">REPORT</a>
+                <a href="forum.html">FORUM</a>
+            </nav>
+            <div class="account-menu">
+                <i class="fas fa-bars menu-icon"></i>
+                <div class="dropdown-menu">
+                    <a href="favorites.html">Favorites</a>
+                    <a href="settings.html">Settings</a>
+                    <a href="my-account.html">My Account</a>
+                    <a href="logout.html">Log Out</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="landing-main">
+            <div class="landing-content">
+                <section class="landing-text">
+                    <h1>
+                        ONE<br>
+                        VOTE<br>
+                        ONE FUTURE
+                    </h1>
+                    <p>
+                        One Vote, One Future is a web application designed to provide legal-aged students (18 years old and above) with reliable and accessible political education.
+                    </p>
+                    <div class="landing-buttons">
+                        <a href="login.html" class="btn btn-light">Login</a>
+                        <a href="create-account.html" class="btn btn-primary">Sign Up</a>
+                    </div>
+                </section>
+                <section class="landing-image">
+                    <img src="1v1f.png" alt="Illustration for One Vote One Future campaign" />
+                </section>
+            </div>
+        </main>
     </div>
-   </section>
-   <section class="md:w-1/2 mt-10 md:mt-0 flex justify-center">
-   <img alt class="max-w-full h-auto" height="350" src="1v1f.png" width="600"/>
-</section>
-</main>
+
+    <!-- JavaScript for the dropdown menu -->
+    <script>
+        const menuIcon = document.querySelector('.menu-icon');
+        const dropdown = document.querySelector('.dropdown-menu');
+
+        menuIcon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.account-menu')) {
+                dropdown.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
